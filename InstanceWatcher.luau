@@ -15,10 +15,10 @@ end
 
 --//
 
-function InstanceWatcher:Add(name : string, instance : Instance | {Instance})
+function InstanceWatcher:Add(name : string, instance : Instance | {Instance}, cleanupOld : boolean?)
     local newName = (name or instance.Name)
 
-    if (self.instances[newName]) then
+    if ((self.instances[newName]) and (cleanupOld)) then
         self:Remove(newName)
         warn(`{script.Name}: Removed already existing Instance in {newName}!`)
     end
